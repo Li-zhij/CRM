@@ -7,13 +7,32 @@ public class User {
     private String loginPwd;
     private String email;
     private String expireTime;  // 失效时间
-    private String lockState;   // 锁定状态
+    private String lockStatus;   // 锁定状态
     private String deptno;      // 部门编号
     private String allowIps;    // IP 地址
     private String createTime;
     private String createBy;
     private String editTime;
     private String editBy;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", loginAct='" + loginAct + '\'' +
+                ", name='" + name + '\'' +
+                ", loginPwd='" + loginPwd + '\'' +
+                ", email='" + email + '\'' +
+                ", expireTime='" + expireTime + '\'' +
+                ", lockStatus='" + lockStatus + '\'' +
+                ", deptno='" + deptno + '\'' +
+                ", allowIps='" + allowIps + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", editTime='" + editTime + '\'' +
+                ", editBy='" + editBy + '\'' +
+                '}';
+    }
 
     public String getId() {
         return id;
@@ -63,12 +82,12 @@ public class User {
         this.expireTime = expireTime;
     }
 
-    public String getLockState() {
-        return lockState;
+    public String getLockStatus() {
+        return lockStatus;
     }
 
-    public void setLockState(String lockState) {
-        this.lockState = lockState;
+    public void setLockStatus(String lockState) {
+        this.lockStatus = lockState;
     }
 
     public String getDeptno() {

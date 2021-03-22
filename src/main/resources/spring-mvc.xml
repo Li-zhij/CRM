@@ -13,5 +13,9 @@
     <context:component-scan base-package="zhij.controller" />
     <mvc:annotation-driven />
     <mvc:resources mapping="/**" location="/" />
+    <!--处理跨域-->
+    <mvc:cors>
+        <mvc:mapping path="/**"/>
+    </mvc:cors>
 
 </beans>
