@@ -1,5 +1,7 @@
 package zhij.controller;
 
+import zhij.common.Result;
+import zhij.common.ResultCode;
 import zhij.domain.User;
 import zhij.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,62 +20,79 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // 登录验证
+    @PostMapping(value = "/login")
+    @ResponseBody
+    public Result login(@RequestParam(name = "loginAct", required = true) String loginAct,
+                        @RequestParam(name = "loginPwd", required = true) String loginPwd) {
+        if ("".equals(loginAct) || "".equals(loginPwd)) {
+            return new Result(ResultCode.PWD_OR_ACT_ERROR);
+        }
+        User user = userService.getUserByActAndPwd(loginAct, loginPwd);
+        if (user == null) {
+            return new Result(ResultCode.PWD_OR_ACT_ERROR);
+        }
+        if ("0".equals(user.getLockStatus())) {
+            return new Result(ResultCode.USER_LOCKED);
+        }
+        return new Result(ResultCode.SUCCESS, user);
+    }
+
+    // 添加用户
     @PostMapping(value = "/addUser")
     @ResponseBody
-    public Map<String,String> addUser(@RequestBody User user) {
+    public Result addUser(@RequestBody User user) {
         System.out.println(user);
         UUID uuid = UUID.randomUUID();
         String id = uuid.toString().replaceAll("-", "");
         user.setId(id);
         int flag = userService.addUser(user);
-        Map<String,String> result = new HashMap<>();
         if (flag == 1) {
-            result.put("status", "success");
+           return new Result(ResultCode.SUCCESS);
         } else {
-            result.put("status", "fail");
+           return new Result(ResultCode.FAIL);
         }
-        return result;
     }
 
+    // 修改用户
     @PostMapping(value = "/updateUser")
     @ResponseBody
-    public Map<String,String> updateUser(@RequestBody User user) {
+    public Result updateUser(@RequestBody User user) {
         System.out.println(user);
         int flag = userService.updateUser(user);
-        Map<String,String> result = new HashMap<>();
         if (flag == 1) {
-            result.put("status", "success");
+            return new Result(ResultCode.SUCCESS);
         } else {
-            result.put("status", "fail");
+            return new Result(ResultCode.FAIL);
         }
-        return result;
     }
 
+    // 删除用户
     @PostMapping(value = "/deleteUser")
     @ResponseBody
-    public Map<String,String> deleteUser(String id) {
+    public Result deleteUser(String id) {
         System.out.println(id);
         int flag = userService.deleteUser(id);
-        Map<String,String> result = new HashMap<>();
         if (flag == 1) {
-            result.put("status", "success");
+            return new Result(ResultCode.SUCCESS);
         } else {
-            result.put("status", "fail");
+            return new Result(ResultCode.FAIL);
         }
-        return result;
     }
 
+    // 查询用户列表
     @GetMapping(value = "/getUsers")
     @ResponseBody
     @CrossOrigin
-    public List<User> getUsers() {
-        return userService.getUsers();
+    public Result getUsers() {
+        return new Result(ResultCode.SUCCESS, userService.getUsers());
     }
 
+    // 根据 id 查询用户
     @GetMapping(value = "/getUserById")
     @ResponseBody
-    public User getUserById(String id) {
-        return userService.getUserById(id);
+    public Result getUserById(String id) {
+        return new Result(ResultCode.SUCCESS, userService.getUserById(id));
     }
 
 }

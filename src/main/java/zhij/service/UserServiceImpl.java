@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User getUserByActAndPwd(String loginAct, String loginPwd) {
+        return userDao.getUserByActAndPwd(loginAct, loginPwd);
+    }
+
+    @Override
     public List<User> getUsers() {
         return userDao.getUsers();
     }

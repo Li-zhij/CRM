@@ -41,6 +41,15 @@
             id=#{id}
     </select>
 
+    <select id="getUserByActAndPwd" resultType="User">
+        select
+            id,loginAct,name,loginPwd,email,expireTime,lockStatus,deptno,allowIps,createTime,createBy,editTime,editBy
+        from
+            user
+        where
+            loginAct=#{loginAct} and loginPwd=#{loginPwd}
+    </select>
+
     <select id="getUsers" resultType="User">
         select
             id,loginAct,name,loginPwd,email,expireTime,lockStatus,deptno,allowIps,createTime,createBy,editTime,editBy
