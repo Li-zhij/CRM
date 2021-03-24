@@ -17,5 +17,14 @@
     <mvc:cors>
         <mvc:mapping path="/**"/>
     </mvc:cors>
-
+    <!--声明拦截器：0个或多个-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/error/**"/>
+            <bean class="zhij.interceptor.UserInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
 </beans>

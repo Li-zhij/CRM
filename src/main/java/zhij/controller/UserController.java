@@ -23,8 +23,9 @@ public class UserController {
     // 登录验证
     @PostMapping(value = "/login")
     @ResponseBody
-    public Result login(@RequestParam(name = "loginAct", required = true) String loginAct,
-                        @RequestParam(name = "loginPwd", required = true) String loginPwd) {
+    public Result login(@RequestBody Map<String, String> loginForm) {
+        String loginAct = loginForm.get("loginAct");
+        String loginPwd = loginForm.get("loginPwd");
         if ("".equals(loginAct) || "".equals(loginPwd)) {
             return new Result(ResultCode.PWD_OR_ACT_ERROR);
         }

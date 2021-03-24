@@ -3,7 +3,7 @@ package zhij.common;
 public class Result {
 
     private boolean success;    // 是否成功
-    private int code;   // 返回码
+    private String code;   // 返回码
     private String message; // 返回信息
     private Object data;    // 返回数据
 
@@ -20,7 +20,7 @@ public class Result {
         this.data = data;
     }
 
-    public Result(boolean success, int code, String message) {
+    public Result(boolean success, String code, String message) {
         this.success = success;
         this.code = code;
         this.message = message;
@@ -46,11 +46,11 @@ public class Result {
         this.success = success;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
