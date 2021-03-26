@@ -17,14 +17,17 @@
     <mvc:cors>
         <mvc:mapping path="/**"/>
     </mvc:cors>
+    <!--swagger-->
+    <bean class="zhij.config.SwaggerConfig" />
     <!--声明拦截器：0个或多个-->
-    <mvc:interceptors>
+    <!--<mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/user/login"/>
             <mvc:exclude-mapping path="/error/**"/>
+            <mvc:exclude-mapping path="/swagger-ui.html"/>
             <bean class="zhij.interceptor.UserInterceptor" />
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
     
 </beans>

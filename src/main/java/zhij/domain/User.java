@@ -1,18 +1,35 @@
 package zhij.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel
 public class User {
+    @ApiModelProperty(value = "用户id")
     private String id;
+    @ApiModelProperty(value = "用户账号")
     private String loginAct;
+    @ApiModelProperty(value = "用户姓名")
     private String name;    // 真实姓名
+    @ApiModelProperty(value = "用户密码")
     private String loginPwd;
+    @ApiModelProperty(value = "用户email")
     private String email;
+    @ApiModelProperty(value = "用户账号失效时间")
     private String expireTime;  // 失效时间
+    @ApiModelProperty(value = "用户锁定状态")
     private String lockStatus;   // 锁定状态
+    @ApiModelProperty(value = "用户部门编号")
     private String deptno;      // 部门编号
+    @ApiModelProperty(value = "用户ip地址")
     private String allowIps;    // IP 地址
+    @ApiModelProperty(value = "用户创建时间")
     private String createTime;
+    @ApiModelProperty(value = "用户创建人")
     private String createBy;
+    @ApiModelProperty(value = "用户修改时间")
     private String editTime;
+    @ApiModelProperty(value = "用户修改人")
     private String editBy;
 
     @Override
